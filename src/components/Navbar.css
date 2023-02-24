@@ -8,20 +8,14 @@
 }
 
 .nav-menu-items {
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 500;
-  margin-right: 30px;
   margin-top: 20px;
-  padding: 10px;
-  color: #fff;
+  color: black;
+  padding-top: 0;
 }
 
-.nav-menu-items:visited {
-  color: #fff;
-}
-
-.nav-menu-items:active,
-.nav-menu-items:hover {
-  color: #fff;
-  border-top: 2px solid var(--primary-orange);
+.navbar-toggler:focus,
+.navbar-toggler:active {
+  box-shadow: none;
 }
