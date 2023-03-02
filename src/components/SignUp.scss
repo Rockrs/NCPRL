@@ -1,0 +1,20 @@
+.register-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+  .loader {
+    margin: 20px auto;
+    font-size: 200px;
+  }
+  .error {
+    margin: 20px auto;
+    width: 100%;
+    button {
+      margin-top: 20px;
+      outline: 0;
+      border: 0;
+      display: block;
+    }
+  }
+}
