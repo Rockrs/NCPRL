@@ -9,6 +9,7 @@ const Contact = () => {
   const Users = JSON.parse(JSON.stringify(users));
   const userKeys = Object.keys(Users);
   const images = [Naveen, Shekhar];
+
   return (
     <div className='container contact-wrapper'>
       <h1 className='text-center'>Contact Us</h1>

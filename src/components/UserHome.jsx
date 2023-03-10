@@ -1,17 +1,14 @@
 import React from 'react';
 import './UserHome.scss';
-import stadium from '../assests/stadium.jpg';
-import Navbar from './Navbar';
+import Banner from '../assests/banner.svg';
 import Links from './Links';
 
 const UserHome = () => {
   return (
     <main className='user-home-container'>
-      <Navbar></Navbar>
-      <section className='mt-4'>
-        <div className='ncrpl pt-4'>NCR Premier League</div>
-        <div className='img-wrapper mt-3'>
-          <img src={stadium} alt='staduim' />
+      <section>
+        <div className='img-wrapper'>
+          <img src={Banner} alt='banner' />
         </div>
       </section>
       <Links></Links>

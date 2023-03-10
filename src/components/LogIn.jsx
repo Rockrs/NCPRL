@@ -1,23 +1,20 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../firebase';
+import { Link } from 'react-router-dom';
+import useLogInUser from '../hooks/useLogInUser';
 import './LogIn.scss';
 
-const SignIn = () => {
-  const [userProfile, setUserProfile] = useState({
+const Login = () => {
+  const [userCredential, setuserCredential] = useState({
     email: '',
     password: '',
   });
 
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [isTryAgain, setTryAgain] = useState(true);
-  const navigate = useNavigate();
+  const { loading, error, isTryAgain, loginUser, setError, setTryAgain } =
+    useLogInUser();
 
   const inputChangeHandler = (event) => {
     const { name, value } = event.target;
-    setUserProfile({ ...userProfile, [name]: value });
+    setuserCredential({ ...userCredential, [name]: value });
   };
 
   const reloadSignInForm = () => {
@@ -27,17 +24,7 @@ const SignIn = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
-    setTryAgain(false);
-    signInWithEmailAndPassword(auth, userProfile.email, userProfile.password)
-      .then(() => {
-        navigate('/home');
-      })
-      .catch(function (error) {
-        setError(error.message);
-        setTryAgain(false);
-        setLoading(false);
-      });
+    loginUser(userCredential);
   };
 
   return (
@@ -91,4 +78,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default Login;

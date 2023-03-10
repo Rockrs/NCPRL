@@ -1,53 +1,31 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
-import { auth } from '../firebase';
-import './SignUp.scss';
+import { Link } from 'react-router-dom';
+import useRegisterUser from '../hooks/useRegisterUser';
+import './Register.scss';
 
-const Signup = () => {
-  const [userProfile, setUserProfile] = useState({
+const Register = () => {
+  const [userCredential, setuserCredential] = useState({
     email: '',
     password: '',
     fullName: '',
   });
 
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [isTryAgain, setTryAgain] = useState(true);
-  const navigate = useNavigate();
+  const { loading, error, isTryAgain, registerUser, setError, setTryAgain } =
+    useRegisterUser();
 
   const inputChangeHandler = (event) => {
     const { name, value } = event.target;
-    setUserProfile({ ...userProfile, [name]: value });
+    setuserCredential({ ...userCredential, [name]: value });
   };
 
-  const reloadSignUpForm = () => {
+  const reloadRegisterForm = () => {
     setError(null);
     setTryAgain(true);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
-    setTryAgain(false);
-    createUserWithEmailAndPassword(
-      auth,
-      userProfile.email,
-      userProfile.password
-    )
-      .then(function (result) {
-        return updateProfile(result.user, {
-          displayName: userProfile.fullName,
-        });
-      })
-      .then(() => {
-        navigate('/home');
-      })
-      .catch(function (error) {
-        setError(error.message);
-        setTryAgain(false);
-        setLoading(false);
-      });
+    registerUser(userCredential);
   };
 
   return (
@@ -56,7 +34,7 @@ const Signup = () => {
       {error && (
         <div className='alert alert-danger error' role='alert'>
           {error}
-          <button onClick={reloadSignUpForm}>Try Again</button>
+          <button onClick={reloadRegisterForm}>Try Again</button>
         </div>
       )}
       <div style={{ width: '100%' }}>
@@ -100,16 +78,16 @@ const Signup = () => {
               onClick={handleSubmit}
               disabled={!isTryAgain ? true : false}
             >
-              Sign up
+              Register
             </button>
           </div>
         </form>
         <div className='p-1 box mt-3 text-center'>
-          Already have an account? <Link to='/sign-in'>Log In</Link>
+          Already have an account? <Link to='/login'>LogIn</Link>
         </div>
       </div>
     </div>
   );
 };
 
-export default Signup;
+export default Register;

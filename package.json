@@ -19,7 +19,9 @@
     "firebase": "^9.17.1",
     "node-sass": "^8.0.0",
     "react": "^18.2.0",
+    "react-avatar-editor": "^13.0.0",
     "react-dom": "^18.2.0",
+    "react-font": "^1.2.1",
     "react-fontawesome": "^1.7.1",
     "react-google-button": "^0.7.2",
     "react-icons": "^4.7.1",
@@ -30,6 +32,7 @@
     "typed.js": "^2.0.12",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4",
+    "webfontloader": "^1.6.28",
     "xlsx": "^0.18.5",
     "zustand": "^4.3.3"
   },

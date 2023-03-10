@@ -1,6 +1,5 @@
 import React from 'react';
 import Teams from '../assests/cricket.gif';
-// import Schedule from '../assests/calendar.png';
 import MatchSchedule from '../assests/calendar-icon.gif';
 import Summary from '../assests/strategy.gif';
 import './Links.scss';
@@ -8,10 +7,7 @@ import './Links.scss';
 const Links = () => {
   return (
     <>
-      <div className='links mt-4'>
-        <h3>Links</h3>
-      </div>
-      <div className='btn-wrapper d-flex'>
+      <div className='btn-wrapper d-flex' style={{ marginTop: '20px' }}>
         <button
           className='btn btn-primary'
           style={{ backgroundColor: '#AAFFE0' }}

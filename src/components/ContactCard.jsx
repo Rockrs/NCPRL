@@ -8,8 +8,8 @@ const ContactCard = ({ userInfo, image }) => {
   const { name, mobile, intro } = userInfo;
   return (
     <div className='card-container d-flex'>
-      <div class='image-container'>
-        <img class='user-image' src={image} alt={name}></img>
+      <div className='image-container'>
+        <img className='user-image' src={image} alt={name}></img>
       </div>
       <div className='info-container'>
         <div className='info'>
