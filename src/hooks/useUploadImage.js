@@ -1,28 +1,30 @@
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import { fireStorage } from '../firebase';
 import { useState } from 'react';
+import { fireStorage } from '../firebase';
 
 const useUploadImage = () => {
-  const [error, setError] = useState(null);
-  const [imageUrl, setImageUrl] = useState(null);
+  const [imageUrlAfterUpload, setImageUrlAfterUpload] = useState(null);
+  const metadata = {
+    contentType: 'image/jpeg',
+  };
 
   const uploadImage = (file, id) => {
-    const metadata = {
-      contentType: 'image/jpeg',
-    };
     const storageRef = ref(fireStorage, 'images/' + id, metadata);
     return uploadBytes(storageRef, file)
       .then(() => {
-        getDownloadURL(storageRef).then((url) => {
-          localStorage.setItem('profile-pic', JSON.stringify(url));
-          setImageUrl(url);
-        });
+        getDownloadURL(storageRef)
+          .then((url) => {
+            setImageUrlAfterUpload(url);
+          })
+          .catch((err) => {
+            console.error(err.code);
+          });
       })
-      .catch((error) => {
-        setError(error.message);
+      .catch((err) => {
+        console.error(err.code);
       });
   };
-  return { imageUrl, error, uploadImage };
+  return { uploadImage, imageUrlAfterUpload };
 };
 
 export default useUploadImage;

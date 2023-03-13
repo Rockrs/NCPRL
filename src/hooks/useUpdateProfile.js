@@ -28,8 +28,8 @@ const useUpdateProfile = () => {
         setError(null);
         navigate('/user-home');
       })
-      .catch(() => {
-        setError(error.message);
+      .catch((err) => {
+        setError(err.message);
         setLoading(false);
         setTryAgain(false);
       });

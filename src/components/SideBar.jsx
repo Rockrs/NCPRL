@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import useGetProfile from '../hooks/useGetProfile';
 import useUploadImage from '../hooks/useUploadImage';
 import Close from '../assests/close.png';
+import { useGetImage } from '../hooks/useGetImage';
 import './SideBar.scss';
 
 const SideBar = () => {
@@ -11,7 +12,8 @@ const SideBar = () => {
   const { getProfileData, data } = useGetProfile();
   const navigate = useNavigate();
   const inputRef = useRef(null);
-  const { uploadImage, imageUrl } = useUploadImage();
+  const { uploadImage, imageUrlAfterUpload } = useUploadImage();
+  const { imageUrl, downloadImage } = useGetImage();
 
   const closeProfileModal = () => {
     const Modal = document.getElementsByClassName('modal')[0];
@@ -38,6 +40,10 @@ const SideBar = () => {
     };
   }, []);
 
+  useEffect(() => {
+    downloadImage(user.uid);
+  }, [imageUrl, user, downloadImage]);
+
   return (
     <>
       <input
@@ -52,10 +58,7 @@ const SideBar = () => {
         </button>
         <div className='wrapper'>
           <div className='avatar' onClick={() => inputRef.current.click()}>
-            <img
-              src={imageUrl || JSON.parse(localStorage.getItem('profile-pic'))}
-              alt='Profile'
-            ></img>
+            <img src={imageUrl || imageUrlAfterUpload} alt='Profile'></img>
           </div>
           <h3>{user.displayName}</h3>
           <hr></hr>

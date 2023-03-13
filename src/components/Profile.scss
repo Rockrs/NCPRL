@@ -17,4 +17,10 @@
       display: block;
     }
   }
+  input {
+    &:focus,
+    &:active {
+      box-shadow: none;
+    }
+  }
 }

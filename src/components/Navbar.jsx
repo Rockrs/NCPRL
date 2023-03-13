@@ -15,11 +15,10 @@ const Navbar = () => {
     signOut(auth)
       .then(() => {
         navbarCollapse[0].classList.remove('show');
-        localStorage.removeItem('profile-pic');
         navigate('/');
       })
-      .catch((error) => {
-        // An error happened.
+      .catch((err) => {
+        console.warn('Logout Failed', err);
       });
   };
 
